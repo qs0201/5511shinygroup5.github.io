@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>选项卡示例</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		#tabs {
+			display: flex;
+			height: 100vh;
+		}
+		#tabs ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			background-color: #eee;
+			width: 200px;
+			height: 100%;
+			overflow-y: auto;
+			box-sizing: border-box;
+			border-right: 1px solid #ddd;
+		}
+		#tabs ul li {
+			padding: 10px;
+			border-bottom: 1px solid #ddd;
+			cursor: pointer;
+		}
+		#tabs ul li.active {
+			background-color: #fff;
+			font-weight: bold;
+		}
+		#tabs iframe {
+			flex: 1;
+			border: none;
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div id="tabs">
+		<ul>
+			<li class="active" data-url="https://qs0201.shinyapps.io/apppre/">App1</li>
+			<li data-url="https://ycz436.shinyapps.io/5511pre3/">App2</li>
+			<li data-url="https://ycz436.shinyapps.io/5511pre2/">App3</li>
+		</ul>
+		<iframe src="https://qs0201.shinyapps.io/apppre/"></iframe>
+	</div>
+	<script>
+		// 获取元素
+		var tabs = document.getElementById('tabs');
+		var tabItems = tabs.querySelectorAll('li');
+		var iframe = tabs.querySelector('iframe');
+
+		// 初始化
+		tabItems.forEach(function(item) {
+			item.addEventListener('click', function() {
+				// 移除所有选项卡的 active 样式
+				tabItems.forEach(function(tab) {
+					tab.classList.remove('active');
+				});
+				// 添加当前选项卡的 active 样式
+				item.classList.add('active');
+				// 更新 iframe 的 src 属性
+				iframe.src = item.getAttribute('data-url');
+			});
+		});
+	</script>
+</body>
+</html>
